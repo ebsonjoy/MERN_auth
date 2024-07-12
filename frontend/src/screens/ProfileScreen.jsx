@@ -20,34 +20,32 @@ const ProfileScreen = () => {
     const dispatch = useDispatch();
     const {userInfo} = useSelector((state)=>state.auth)
     const [updateProfile, {isLoading}] = useUpdateUserMutation();
-    useEffect(()=>{
-       setName(userInfo.name)
-       setEmail(userInfo.email)
-    },[userInfo.setName, userInfo.setEmail]);
-
-
-
-
-    const submitHandler = async(e)=>{
-        e.preventDefault();
-        if(password !== confirmPassword){
-            toast.error('Password do no match')
-        }else{
-           try {
-            const res = await updateProfile({
-                _id: userInfo._id,
-                name,
-                email,
-                password
-            }).unwrap();
-            dispatch(setCredentials({...res}))
-            toast.success('Profile Updated')
-           } catch (err) {
-            toast.error(err?.data?.message || err.error);
-            
-           }
+    useEffect(() => {
+        if (userInfo) {
+            setName(userInfo.name || '');
+            setEmail(userInfo.email || '');
         }
-    }
+    }, [userInfo]);
+    
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        if (password !== confirmPassword) {
+            toast.error('Passwords do not match');
+        } else {
+            try {
+                const res = await updateProfile({
+                    _id: userInfo._id,
+                    name,
+                    email,
+                    password
+                }).unwrap();
+                dispatch(setCredentials({ ...res }));
+                toast.success('Profile Updated');
+            } catch (err) {
+                toast.error(err?.data?.message || err.error);
+            }
+        }
+    };
   return (      
     <FormContainer>
         <h1>Profile Update</h1>
