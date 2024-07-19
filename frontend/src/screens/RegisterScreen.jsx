@@ -31,9 +31,40 @@ const RegisterScreen = () => {
 
     const submitHandler = async(e)=>{
         e.preventDefault();
-        if(password !== confirmPassword){
-            toast.error('Password do no match')
-        }else{
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const nameRegex = /^[A-Za-z\s'-]+$/;
+        if (!name || !email || !password || !confirmPassword) {
+            toast.error('All fields are required');
+            return;
+          }
+        if (!name) {
+            toast.error('Name is required');
+            return;
+        }
+        if (!nameRegex.test(name)) {
+            toast.error('Name is not valid');
+            return;
+        }
+        if (!email) {
+            toast.error('Email is required');
+            return;
+        }
+        if (!emailRegex.test(email)) {
+            toast.error('Email is not valid');
+            return;
+        }
+        if (!password) {
+            toast.error('Password is required');
+            return;
+        }
+        if (password.length < 6) {
+            toast.error('Password must be at least 6 characters');
+            return;
+        }
+        if (password !== confirmPassword) {
+            toast.error('Passwords do not match');
+            return;
+        }
             try {
             const res = await register({name,email , password}).unwrap();
             dispatch(setCredentials({...res}))
@@ -41,7 +72,7 @@ const RegisterScreen = () => {
             } catch (err) {
                 toast.error(err?.data?.message || err.error);
             }
-        }
+        
     }
   return (      
     <FormContainer>
