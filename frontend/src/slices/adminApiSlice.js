@@ -26,7 +26,7 @@ export const admiApiSlice=apiSlice.injectEndpoints({
             })
         }),
         getUserData:builder.mutation({
-            query:(data)=>({
+            query:()=>({
                url:`${ADMIN_URL}/get-user` ,
                method:'POST',
             })
@@ -44,9 +44,15 @@ export const admiApiSlice=apiSlice.injectEndpoints({
                method:'POST',
                body:data
             })
-        })
+        }),
+        getUserCount: builder.query({
+            query: () => ({
+              url: `${ADMIN_URL}/user-count`,
+              method: 'GET'
+            })
+          }),
 
     })
 })
 
-export const {useAdminLoginMutation,useAdminLogoutMutation,useAdminUpdateUserMutation,useGetUserDataMutation,useDeleteUserDataMutation,useAddNewUserMutation}= admiApiSlice
+export const {useAdminLoginMutation,useAdminLogoutMutation,useAdminUpdateUserMutation,useGetUserDataMutation,useDeleteUserDataMutation,useAddNewUserMutation,useGetUserCountQuery}= admiApiSlice

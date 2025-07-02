@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import { setCredentials } from "../slices/authSlice";
 import { useUpdateUserMutation } from "../slices/usersApiSlices";
-const PROFILE_IMAGE_DIR_PATH = 'http://localhost:5000/UserProfileImages/'
+const PROFILE_IMAGE_DIR_PATH = 'http://localhost:4000/UserProfileImages/'
 
 
 
@@ -55,6 +55,8 @@ const ProfileScreen = () => {
         if (profileImageName) {
             formData.append('profileImage', profileImageName);
         }
+      console.log(profileImageName);
+      
         const res = await updateProfile(formData).unwrap();
         dispatch(setCredentials({ ...res }));
         toast.success('Profile Updated Successfully');

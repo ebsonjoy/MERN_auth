@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { UsersTable } from '../../components/adminComponents/UsersTable'
 import { useGetUserDataMutation } from '../../slices/adminApiSlice'
-import { useAdminUpdateUserMutation } from '../../slices/adminApiSlice'
+
 import { toast } from "react-toastify";
 
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { Button, Modal, Form as BootstrapForm } from "react-bootstrap";
@@ -10,7 +10,9 @@ import "./userTable.css";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+
 export const UsersTable = ({ users, refetchData }) => {
+  
   const [showRegisterModal, setShowURegisterModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [userIdToUpdate, setUserIdToUpdate] = useState("");
@@ -37,6 +39,9 @@ export const UsersTable = ({ users, refetchData }) => {
     setSearchQuery(event.target.value);
   };
 
+  console.log(users);
+  
+
   const filteredUsers = users.filter(
     (user) =>
       user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -62,7 +67,7 @@ export const UsersTable = ({ users, refetchData }) => {
       console.log(responseFromApiCall);
       toast.success("User Deleted Succesfully");
       refetchData();
-    } catch (err) {
+    } catch (err) { 
       toast.error(err?.data?.message || err?.error);
     }
   };
@@ -84,6 +89,7 @@ export const UsersTable = ({ users, refetchData }) => {
   };
   return (
     <>
+    
       <div className="containerS">
         <div>
           <BootstrapForm>

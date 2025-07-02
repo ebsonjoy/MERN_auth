@@ -100,4 +100,9 @@ const addNewUser = asyncHandler(async (req, res) => {
   }
 });
 
-export { authAdmin, logoutAdmin, addNewUser, deleteUser, updateUserData, getAllUser };
+const getUserCount = asyncHandler(async (req, res) => {
+  const userCount = await User.countDocuments({});
+  res.status(200).json({ count: userCount });
+});
+
+export { authAdmin, logoutAdmin, addNewUser, deleteUser, updateUserData, getAllUser, getUserCount };
