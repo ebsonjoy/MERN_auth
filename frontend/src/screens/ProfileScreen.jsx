@@ -8,7 +8,9 @@ import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import { setCredentials } from "../slices/authSlice";
 import { useUpdateUserMutation } from "../slices/usersApiSlices";
-const PROFILE_IMAGE_DIR_PATH = 'http://localhost:4000/UserProfileImages/'
+// const PROFILE_IMAGE_DIR_PATH = 'http://localhost:4000/UserProfileImages/'
+const PROFILE_IMAGE_DIR_PATH = 'https://mern-auth-066k.onrender.com/UserProfileImages/'
+
 
 
 
