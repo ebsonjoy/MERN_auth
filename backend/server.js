@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import cors from 'cors'
 dotenv.config();
 import { notFound,errorHandler } from './middleware/errorMiddleware.js';
 import connectDB from './config/db.js';
@@ -11,6 +12,10 @@ import adminRoutes from './routes/adminRoutes.js'
 
 connectDB();
 const app = express();
+app.use(cors({
+    origin: ['http://localhost:3000', 'https://mern-auth-seven-psi.vercel.app'],
+  credentials: true,
+}))
 app.use(express.json());
 app.use(express.static('backend/public'));
 app.use(express.urlencoded({extended : true}));
